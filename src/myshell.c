@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <sys/wait.h>
-#include "builtin_commands.h"
+#include "../include/builtin_commands.h"
 
 #define BUFFER_SIZ 512 
 #define MAX_PATH 256 
@@ -26,7 +26,7 @@ void load_environment(char *pathPtr[], int *pathCount) {
 	char *path_start, *tok;
 	ssize_t nread;
 
-	if((fd = open(".myshell", O_RDONLY)) < 0) {
+	if((fd = open("config/.myshell", O_RDONLY)) < 0) {
 		perror("Failed to open .myshell\n");
 		exit(-1);
 	}

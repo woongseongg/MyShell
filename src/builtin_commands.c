@@ -2,7 +2,7 @@
  * Defining built-in command fuctions 
 */
 
-#include "builtin_commands.h"
+#include "../include/builtin_commands.h"
 
 // Print help
 int my_help() {
