@@ -1,7 +1,7 @@
 /* 
  *
  * Main Shell Program
- * 쉘 인터페이스를 구현
+ * shell 인터페이스를 구현
  * 
  * 주요 기능:
  * 1. 사용자 입력을 받아 명령어와 인자를 처리
@@ -34,11 +34,11 @@ char cmd_for_builtin[10];
  * SIGINT(Ctrl+C) 핸들러
  *
  * 목적:
- * 사용자가 Ctrl+C를 눌렀을 때 프로그램이 종료되지 않고 메시지를 출력한 후 계속 실행되도록 합니다.
- *
+ * 사용자가 Ctrl+C를 눌렀을 때 프로그램이 종료되지 않고 메시지를 출력한 후 계속 실행되도록 설정
+ * 
  * 주요 동작:
  * 1. SIGINT 시그널을 받으면 메시지를 출력
- * 2. 프로그램 동작을 중단하지 않고 쉘 동작을 유지
+ * 2. 프로그램 동작을 중단하지 않고 shell 동작을 유지
  *
  * @param sig 처리할 시그널 번호 (SIGINT에 해당)
  */
@@ -51,7 +51,7 @@ void sigint_handler(int sig) {
  * 환경 변수 설정 함수
  *
  * 목적:
- * .myshell 파일에서 PATH 정보를 읽어와 셸이 명령어를 검색할 경로 목록을 설정
+ * .myshell 파일에서 PATH 정보를 읽어와 shell이 명령어를 검색할 경로 목록을 설정
  *
  * 파일 형식:
  * .myshell 파일은 "PATH=경로1:경로2:..." 형식이며, ':'로 경로를 구분
@@ -206,7 +206,7 @@ int find_command(char *cmd, char *pathPtr[], int pathCount, char *fullPath) {
  * 메인 함수
  *
  * 목적:
- * 쉘 프로그램의 진입점으로, 전체 실행 흐름을 제어
+ * shell 프로그램의 진입점으로, 전체 실행 흐름을 제어
  *
  * 주요 동작:
  * 1. 환경 변수(PATH) 설정
@@ -248,14 +248,14 @@ int main(int argc, char *argv[]) {
 	int pathCount = 0;		// PATH 배열에 저장된 경로 개수
 	int token_index = 0;		// 파싱된 명령어와 인자 개수
 
-    	// 사용자가 Ctrl+C를 눌러도 프로그램이 종료되지 않고 계속 실행
+    	// 사용자가 "Ctrl+C"를 입력해도 프로그램이 종료되지 않고 계속 실행
 	signal(SIGINT, sigint_handler);		
 
 	// STEP 1: 환경 변수(PATH) 설정
     	// .myshell 파일에서 PATH 값을 읽어와 pathPtr 배열에 저장
 	load_environment(pathPtr, &pathCount);
 
-	// STEP 2: 셸 실행 루프
+	// STEP 2: shell 실행 루프
    	// 사용자가 EOF(Ctrl+D), exit를 입력할 때까지 계속 실행
 	while(1) {
 		printf("wooseong %% ");		// 프롬프트 출력
