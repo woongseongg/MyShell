@@ -23,6 +23,7 @@ myshell project for Linux
   - 'builtin_commands.h': 내장 명령어 함수 선언
 - 'config/': 설정 파일 디렉토리
   - '.myshell': 사용자 정의 경로 설정 파일
+- 'Makefile': 프로그램 빌드 작업 자동화 파일
 
 
 ## 설치 및 실행 방법
