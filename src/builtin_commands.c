@@ -1,31 +1,31 @@
 /*
  * 내장 명령어 정의 파일
  *
- * 쉘 프로그램에서 사용되는 내장 명령어를 구현
- * 내장 명령어란 외부 프로그램을 실행하지 않고, 쉘 자체에서 수행되는 명령어
+ * shell 프로그램에서 사용되는 내장 명령어를 구현
+ * 내장 명령어란 외부 프로그램을 실행하지 않고, shell 자체에서 수행되는 명령어
  *
  * 구현된 내장 명령어:
  * 1. my_cd: 디렉토리 변경
  * 2. my_help: 도움말 출력 (지원 명령어 목록)
- * 3. my_exit: 쉘 종료
+ * 3. my_exit: shell 종료
  * 4. my_pwd: 현재 디렉토리 경로 출력
  * 5. my_echo: 문자열 출력
  *
- * 또한 handle_builtin_command 함수는 입력된 명령어가 내장 명령어인지 확인하고, 쉘이 종료되지 않고 계속 실행
+ * 또한 handle_builtin_command 함수는 입력된 명령어가 내장 명령어인지 확인하고, shell이 종료되지 않고 계속 실행
  */
 int my_help() {
 	printf("Wooseong's Shell\n");
 	printf("Type program names and arguments, and hit enter.\n");
 	printf("The following are built in:\n\n");
 
-	// 현재 쉘에서 지원하는 내장 명령어 목록 출력
+	// 현재 shell에서 지원하는 내장 명령어 목록 출력
 	printf("\tmy_cd\n");
 	printf("\tmy_help\n");
 	printf("\tmy_exit\n");
 	printf("\tmy_pwd\n");
 	printf("\tmy_echo\n");
 
-	return 1;	// 현재 쉘에서 지원하는 내장 명령어 목록 출력
+	return 1;	// 현재 shell에서 지원하는 내장 명령어 목록 출력
 }
 
 
@@ -47,7 +47,7 @@ int my_help() {
  * 3. 변경 실패 시 시스템 오류 메시지 출력
  *
  * 반환값:
- * - 항상 1을 반환하여 쉘이 종료되지 않고 계속 실행
+ * - 항상 1을 반환하여 shell이 종료되지 않고 계속 실행
  */
 int my_cd(char **path) {
 	if(path[1] == NULL) {	// 디렉토리 경로가 입력되지 않은 경우
@@ -58,12 +58,12 @@ int my_cd(char **path) {
 			perror("my_cd");
 		}
 	}
-	return 1;		// 쉘이 계속 실행되도록 1 반환
+	return 1;		// shell이 계속 실행되도록 1 반환
 }
 
 
 /**
- * my_exit: 쉘 프로그램을 종료하는 함수
+ * my_exit: shell 프로그램을 종료하는 함수
  *
  * 목적:
  * - 사용자가 `exit` 명령어를 입력하면 프로그램 종료
@@ -91,7 +91,7 @@ int my_exit() {
  * 2. 경로를 출력하며, 가져오는 데 실패하면 오류 메시지를 출력
  *
  * 반환값:
- * - 항상 1을 반환하여 쉘이 종료되지 않고 계속 실행
+ * - 항상 1을 반환하여 shell이 종료되지 않고 계속 실행
  */
 int my_pwd() {
 	char cwd[512];		// 현재 디렉토리 경로를 저장할 버퍼
@@ -101,7 +101,7 @@ int my_pwd() {
 	else {					// 경로 가져오기 실패 시 오류 메시지 출력
 		perror("my_pwd");
 	}
-	return 1;		// 이 계속 실행되도록 1 반환
+	return 1;		// shell이 계속 실행되도록 1 반환
 }
 
 
@@ -122,14 +122,14 @@ int my_pwd() {
  * 3. 출력이 끝난 후 줄 바꿈 추가
  *
  * 반환값:
- * - 항상 1을 반환하여 이 종료되지 않고 계속 실행
+ * - 항상 1을 반환하여 shell이 종료되지 않고 계속 실행
  */
 int my_echo(char **msg) {
 	for(int i=1;msg[i]!=NULL;i++) {		// 첫 번째 인자 이후 출력
 		printf("%s ", msg[i]);
 	}
 	printf("\n");		// 마지막 줄 바꿈 추가
-	return 1;		// 이 계속 실행되도록 1 반환
+	return 1;		// shell이 계속 실행되도록 1 반환
 }
 
 
@@ -152,8 +152,8 @@ int my_echo(char **msg) {
  * 4. 내장 명령어가 아닌 경우 오류 메시지 출력
  *
  * 반환값:
- * - 내장 명령어를 실행한 경우: 해당 함수의 반환값(항상 1).
- * - 내장 명령어가 아닌 경우: -1.
+ * - 내장 명령어를 실행한 경우: 해당 함수의 반환값(항상 1)
+ * - 내장 명령어가 아닌 경우: -1
  */
 int handle_builtin_command(char **cmd) {
 	if(cmd[0] == NULL) {	// 명령어가 입력되지 않은 경우
