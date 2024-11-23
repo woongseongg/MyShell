@@ -21,7 +21,6 @@ myshell project for Linux
   - 'builtin_commands.c': 내장 명령어 정의 파일
 - 'include/': 헤더 파일이 위치한 디렉토리
   - 'builtin_commands.h': 내장 명령어 함수 선언
-- 'bin/': 컴파일된 실행 파일이 저장되는 디렉토리
 - 'config/': 설정 파일 디렉토리
   - '.myshell': 사용자 정의 경로 설정 파일
 
